@@ -2,6 +2,7 @@ package com.github.kongchen.swagger.docgen.reader;
 
 import java.util.Set;
 
+import io.swagger.jaxrs.config.DefaultReaderConfig;
 import org.apache.maven.plugin.logging.Log;
 
 import com.github.kongchen.swagger.docgen.GenerateException;
@@ -21,7 +22,9 @@ public class SwaggerReader extends AbstractReader implements ClassSwaggerReader 
 
     @Override
     public Swagger read(Set<Class<?>> classes) throws GenerateException {
-        return new Reader(swagger).read(classes);
+        DefaultReaderConfig readerConfig = new DefaultReaderConfig();
+        readerConfig.setScanAllResources(true);
+        return new Reader(swagger, readerConfig).read(classes);
     }
 
 }
